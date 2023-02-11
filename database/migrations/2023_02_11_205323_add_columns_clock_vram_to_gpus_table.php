@@ -13,11 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('gpus', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('manufacturer_id');
-            $table->timestamps();
+        Schema::table('gpus', function (Blueprint $table) {
+            $table->integer('clock');
+            $table->integer('vram');
         });
     }
 
@@ -28,6 +26,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('gpus');
+        Schema::table('gpus', function (Blueprint $table) {
+            $table->dropColumn('clock');
+            $table->dropColumn('vram');
+        });
     }
 };
