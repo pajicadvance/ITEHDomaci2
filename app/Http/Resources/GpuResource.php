@@ -17,6 +17,10 @@ class GpuResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'manufacturer_id' => $this->manufacturer_id,
+            'user_id' => $this->user_id,
+            'clock' => $this->clock,
+            'vram' => $this->vram,
         ];
     }
 }

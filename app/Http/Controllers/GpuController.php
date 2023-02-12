@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Gpu;
 use Illuminate\Http\Request;
+use App\Http\Resources\GpuResource;
+use App\Models\Manufacturer;
+use Illuminate\Support\Facades\Auth;
 
 class GpuController extends Controller
 {
@@ -22,7 +25,7 @@ class GpuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         $manufacturerNames = array_values((array) Manufacturer::pluck('name'))[0];
         if(!in_array($request->manufacturer, $manufacturerNames)){
