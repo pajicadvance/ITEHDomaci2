@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('gpus', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('manufacturer_id');
+            $table->foreignId('manufacturer_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

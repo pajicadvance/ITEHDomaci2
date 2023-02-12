@@ -14,6 +14,7 @@ class GPU extends Model
         'clock',
         'vram',
         'manufacturer_id',
+        'user_id',
     ];
 
     public function manufacturer()
