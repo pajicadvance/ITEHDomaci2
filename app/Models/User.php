@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function gpus()
     {
-        return $this->hasMany(GPU::class);
+        return $this->hasMany(Gpu::class);
     }
 }

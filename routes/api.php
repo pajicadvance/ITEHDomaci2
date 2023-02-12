@@ -24,18 +24,18 @@ Route::get('/users/{id}', [UserController::class, 'show']);
 
 Route::get('/users/{id}/gpus', [UserController::class, 'showAllGpus']);
 
-Route::get('/gpus/{id}', [GPUController::class, 'show']);
+Route::get('/gpus/{id}', [GpuController::class, 'show']);
 
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::group(['middleware' => ['auth:sanctum']], function(){
-    Route::delete('/gpus/{id}/delete', [GPUController::class, 'destroy']);
+    Route::delete('/gpus/{id}/delete', [GpuController::class, 'destroy']);
 
-    Route::post('/gpus/create', [GPUController::class, 'create']);
+    Route::post('/gpus/create', [GpuController::class, 'create']);
 
-    Route::put('/gpus/{id}/edit', [GPUController::class, 'edit']);
+    Route::put('/gpus/{id}/edit', [GpuController::class, 'edit']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
 });

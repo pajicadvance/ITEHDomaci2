@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function showAllGpus($user_id)
     {
-        $gpus = GPU::where('user_id', $user_id)->get();
+        $gpus = Gpu::where('user_id', $user_id)->get();
         return $gpus;
     }
 

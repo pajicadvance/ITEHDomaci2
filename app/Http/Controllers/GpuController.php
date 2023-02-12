@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GPU;
+use App\Models\Gpu;
 use Illuminate\Http\Request;
 
-class GPUController extends Controller
+class GpuController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -32,7 +32,7 @@ class GPUController extends Controller
         }
         $manufacturer = Manufacturer::where('name', $request->manufacturer)->get()->first();
 
-        $gpu = GPU::create([
+        $Gpu = Gpu::create([
             'name' => $request->name,
             'manufacturer_id' => $manufacturer->id,
             'user_id' => Auth::user()->id,
@@ -41,8 +41,8 @@ class GPUController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'GPU has been created successfully',
-            'gpu' => new GPUResource($gpu),
+            'message' => 'Gpu has been created successfully',
+            'gpu' => new GpuResource($Gpu),
         ]);
     }
 
@@ -60,28 +60,28 @@ class GPUController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\GPU  $gPU
+     * @param  \App\Models\Gpu  $Gpu
      * @return \Illuminate\Http\Response
      */
-    public function show($gpu_id)
+    public function show($Gpu_id)
     {
-        return new GPUResource(GPU::find($gpu_id));
+        return new GpuResource(Gpu::find($Gpu_id));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\GPU  $gPU
+     * @param  \App\Models\Gpu  $Gpu
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, $gpu_id)
+    public function edit(Request $request, $Gpu_id)
     {
         $manufacturerNames = array_values((array) Manufacturer::pluck('name'))[0];
-        $gpuIds = array_values((array) GPU::pluck('id'))[0];
+        $GpuIds = array_values((array) Gpu::pluck('id'))[0];
 
-        if(!in_array($gpu_id, $gpuIds)){
+        if(!in_array($Gpu_id, $GpuIds)){
             return response()->json([
-                'message' => 'GPU ID does not exist',
+                'message' => 'Gpu ID does not exist',
             ]);
         }
         if(!in_array($request->manufacturer, $manufacturerNames)){
@@ -92,18 +92,18 @@ class GPUController extends Controller
 
         $manufacturer = Manufacturer::where('name', $request->manufacturer)->get()->first();
 
-        $gpu = GPU::find($gpu_id);
-        $gpu->manufacturer_id = $manufacturer->id;
-        $gpu->user_id = Auth::user()->id;
-        $gpu->name = $request->name;
-        $gpu->clock = $request->clock;
-        $gpu->vram = $request->vram;
+        $Gpu = Gpu::find($Gpu_id);
+        $Gpu->manufacturer_id = $manufacturer->id;
+        $Gpu->user_id = Auth::user()->id;
+        $Gpu->name = $request->name;
+        $Gpu->clock = $request->clock;
+        $Gpu->vram = $request->vram;
 
-        $gpu->save();
+        $Gpu->save();
 
         return response()->json([
-            'message' => 'GPU updated successfully',
-            'gpu' => new GPUResource($gpu),
+            'message' => 'Gpu updated successfully',
+            'gpu' => new GpuResource($Gpu),
         ]);
     }
 
@@ -111,10 +111,10 @@ class GPUController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\GPU  $gPU
+     * @param  \App\Models\Gpu  $Gpu
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, GPU $gPU)
+    public function update(Request $request, Gpu $Gpu)
     {
         //
     }
@@ -122,30 +122,30 @@ class GPUController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\GPU  $gPU
+     * @param  \App\Models\Gpu  $Gpu
      * @return \Illuminate\Http\Response
      */
-    public function destroy($gpu_id)
+    public function destroy($Gpu_id)
     {
-        $gpuIds = array_values((array) GPU::pluck('id'))[0];
+        $GpuIds = array_values((array) Gpu::pluck('id'))[0];
 
-        if(!in_array($gpu_id, $gpuIds)){
+        if(!in_array($Gpu_id, $GpuIds)){
             return response()->json([
-                'message' => 'GPU ID does not exist',
+                'message' => 'Gpu ID does not exist',
             ]);
         }
 
-        $gpu = GPU::find($gpu_id); 
+        $Gpu = Gpu::find($Gpu_id); 
 
-        if (!$gpu->delete()) {
+        if (!$Gpu->delete()) {
             return response()->json([
-                'error' => 'Unable to delete the GPU'
+                'error' => 'Unable to delete the Gpu'
             ]);
         }
 
         return response()->json([
-            'message' => 'GPU deleted successfully',
-            'gpu' => new GPUResource($gpu),
+            'message' => 'Gpu deleted successfully',
+            'gpu' => new GpuResource($Gpu),
         ]);
     }
 }

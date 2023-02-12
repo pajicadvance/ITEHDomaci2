@@ -12,4 +12,9 @@ class Manufacturer extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function gpus()
+    {
+        return $this->hasMany(Gpu::class);
+    }
 }
